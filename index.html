@@ -1,0 +1,764 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <title>MAN Turkey</title>
+  </head>
+  <body>
+   
+    <div class="jumbotron jumbotron-fluid">
+        
+        <div class="container">
+           <div class="row">
+            <div class="col-3">
+                <img src="./assests/Logo_MAN.png" class="img-fluid  " alt="MAN_logo">
+            </div>
+            <div class="col-9">
+            <h1 class="display-4">MAN Turkey Engineering Bus Order Quality</h1>
+          <p class="lead">Digital Memory Code Generator</p>
+           </div>
+           </div>  
+        </div>
+    </div>
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-3 mb-4">
+                
+               
+                <div class="m-3">
+                    <button type="button" class="btn btn-danger btn-lg w-100" data-toggle="modal" data-target="#gfzModal">Ignore Band</button>
+                </div>
+                <div class="m-3">
+                    <button type="button" class="btn btn-danger btn-lg w-100" data-toggle="modal" data-target="#vkgrModal">VKGR</button>
+                </div>
+                <div class="m-3">
+                    <button type="button" class="btn btn-danger btn-lg w-100" data-toggle="modal" data-target="#kswModal">KSW</button>
+                </div>
+                <div class="m-3">
+                    <button type="button" class="btn btn-danger btn-lg w-100"  data-toggle="modal" data-target="#codeModal">Code</button>
+                </div>
+                <div class="m-3">
+                    <button type="button" class="btn btn-danger btn-lg w-100" data-toggle="modal" data-target="#partsModal">Parts</button>
+                </div>
+                <div class="m-3">
+                    <button type="button" class="btn btn-danger btn-lg w-100" data-toggle="modal" data-target="#checkvalueModal">CheckValue / Add</button>
+                </div>
+                <div class="m-3">
+                    <button type="button" class="btn btn-danger btn-lg w-100" data-toggle="modal" data-target="#overrideModal">Override</button>
+                </div>
+                <div class="m-3">
+                    <button type="button" class="btn btn-danger btn-lg w-100" data-toggle="modal" data-target="#stringBuilderModal">StringBuilder</button>
+                </div>
+                <div class="m-3">
+                    <button type="button" class="btn btn-danger btn-lg w-100" data-toggle="modal" data-target="#vehiclePropertiesModal">Vehicle Properties </button>
+                </div>
+                <div class="m-3">
+                    <button type="button" class="btn btn-danger btn-lg w-100" data-toggle="modal" data-target="#warningModal">Warning Message</button>
+                </div>
+                <div class="m-3">
+                    <button type="button" class="btn btn-danger btn-lg w-100" data-toggle="modal" data-target="#errorModal">Error Message</button>
+                </div>
+
+            </div>
+
+
+
+            <div class="col-9 mb-4 mt-3">
+
+              <div class="float-right mb-2">
+                <button type="button" class="btn btn-outline-danger btn-lg"  id="reset" onClick="window.location.reload();"> <i class="bi bi-trash"></i> Reset</button>
+                <button type="button" class="btn btn-outline-danger btn-lg" id="undo">
+                    <i class="bi bi-arrow-counterclockwise"></i> Undo</button>
+                <button type="button" class="btn btn-outline-danger btn-lg" id="endLoop">End (<span id="bracketCount">0</span>) Loop</button>
+                
+              </div>
+                <div class="form-group mt-2">
+                    <textarea style="resize:none" class="form-control" name="description" id="generateCode" readonly="readonly" rows="25"></textarea>
+                  </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="modal fade" id="gfzModal" tabindex="-1" aria-labelledby="gfzModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="gfzLabel">Ignore Band</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                      <label for="gfzInput">Please enter ignore band:</label>
+                      <input type="text" class="form-control" id="vehicleBandText" aria-describedby="emailHelp" placeholder="FH WJ">
+                      
+                    </div>
+                    
+                  </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" id="gfzGenerate">Generate</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+      <div class="modal fade" id="vkgrModal" tabindex="-1" aria-labelledby="vkgrModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="vkgrLabel">VKGR</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body mb-3">
+
+              <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                <label class="btn btn-secondary active">
+                  <input type="radio"  id="vkgr-if" name="vkgr-selector" value="if"> if
+                </label>
+                <label class="btn btn-secondary">
+                  <input type="radio"  id="vkgr-else" name="vkgr-selector" value="else"> else
+                </label>
+                <label class="btn btn-secondary">
+                  <input type="radio"  id="vkgr-elseif" name="vkgr-selector" value="elseif"> elseif
+                </label>
+              </div>
+                
+                
+                 <div class="mt-4">
+                    <div class="form-check">
+                    <input class="form-check-input" type="radio" name="vkgrselector" id="containstype" value="option1" >
+                    <label class="form-check-label" for="containsTypeRadio">
+                      Contains Type
+                    </label>
+
+                        </div>
+
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item ">
+                                <div class="form-check">
+                                    <input type="radio" title="if(Vkgr.Code.Contains(" id="contains" name="radio-btn"
+                                    value="Contains" />
+                        <label class="form-check-label" for="contains">
+                          Contains
+                        </label>
+                      </div>
+                            </li>
+                            <li class="list-group-item ">
+                                <div class="form-check">
+                                    <input type="radio" title="if(Vkgr.Code.ContainsAny(" id="contains" name="radio-btn"
+                                    value="ContainsAny" />
+                        <label class="form-check-label" for="contains">
+                          Contains Any
+                        </label>
+                      </div>
+                            </li>
+                            <li class="list-group-item ">
+                                <div class="form-check">
+                                    <label><input type="radio" title="if(Vkgr.Code.NotContains(" id="contains" name="radio-btn"
+                                        value="NotContains" />
+                        <label class="form-check-label" for="containsTypeRadio">
+                          Not Contains
+                        </label>
+                      </div>
+                            </li>
+                        </ul>
+                       
+                </div>
+                    <div class="mt-4">
+                        <p>If your statement is false please check this button:</p>
+                    <input type="checkbox" id="false" name="tf-btn" value="true" />
+                    <label class="form-check-label" for="false">
+                      False
+                    </label>
+                    </div>
+                    
+
+                   
+                 <div class="mt-4 ">
+                  <input type="text" class="form-control" id="textArea" name="description" placeholder="83#5370B272">
+                </div>
+                      
+                <div class="mt-4 ">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="vkgrselector" id="centerCode" value="CenterCode" >
+                        <label class="form-check-label" for="containsTypeRadio">
+                          Center Code (AntList)
+                        </label>
+                    </div>
+                    <input type="text" class="form-control" id="centerTextArea" name="description" placeholder="#5380">
+                  </div>
+                 
+                <div class="mt-4">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item ">
+                            
+                                <input type="radio" name="vkgrselector" id="serialVkgrIsEmpty" title="if(serialVkgr.IsEmpty()"
+                                name="tf-btn" value="serialVkgr" />
+                    <label class="form-check-label" for="contains">
+                        vkgrs.IsEmpty())
+                    </label>
+                 
+                        </li>
+                        <li class="list-group-item ">
+                            
+                                <input type="radio" name="vkgrselector" id="serialVkgrIsNotEmpty" title="if(serialVkgr.IsNotEmpty()"
+                                name="tf-btn" value="serialVkgr" />
+                    <label class="form-check-label" for="contains">
+                        vkgrs.IsNotEmpty())
+                    </label>
+                  
+                        </li>
+                        <li class="list-group-item ">
+                            
+                                <input type="radio" name="vkgrselector" id="serialVkgrIsMatch" title="if(serialVkgr.IsMatch()"
+                                name="tf-btn" value="serialVkgr" />
+                    <label class="form-check-label" for="containsTypeRadio">
+                        vkgrs.IsMatch()
+                    </label>
+
+                    <input type="text" class="form-control" id="IsMatchTextArea" name="IsMatch" placeholder="IsMatch">
+                  
+                        </li>
+
+                        <li class="list-group-item ">
+                            
+                                <input type="radio" name="vkgrselector" id="serialVkgrIsNull" title="if(serialVkgr.IsNull()"
+                                name="tf-btn" value="serialVkgr" />
+                    <label class="form-check-label" for="contains">
+                        vkgrs.IsNull())
+                    </label>
+                  
+                        </li>
+                    </ul>
+                </div>  
+
+                <div class="mt-4">
+                    <div class="form-check">
+                        <input type="radio" name="vkgrfooter" id="footer" title=".WhereS(t=>t.FooterCode.Left("
+                        name="footer-btn" value="footer" />
+                    <label class="form-check-label" for="footer">
+                        Footer
+                    </label>
+
+                        </div>
+
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item ">
+                                <div class="form-check">
+                                    <input type="radio" title="1" id="footer_radio1" name="radio-footer" value="1" />
+                        <label class="form-check-label" for="footer_radio1">
+                          1
+                        </label>
+                      </div>
+                            </li>
+                            <li class="list-group-item ">
+                                <div class="form-check">
+                                    <input type="radio" title="2" id="footer_radio2" name="radio-footer"
+                                    value="2" />
+                        <label class="form-check-label" for="footer_radio2">
+                          2
+                        </label>
+                      </div>
+                            </li>
+                        </ul>
+
+                        <input type="text" class="form-control" id="footerTextArea" name="footerDescription" placeholder="change" maxlength="2">
+                </div>
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" id="vkgrGenerate">Generate</button>
+            </div>
+          </div>
+        </div>
+      </div>
+  <!-- \\\\\\\\\\\\\\\\\\   KSW TAB  /////////////////  -->
+      <div class="modal fade" id="kswModal" tabindex="-1" aria-labelledby="kswModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="kswLabel">KSW</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                <label class="btn btn-secondary active">
+                  <input type="radio"  id="ksw-if" name="ksw-selector" value="if"> if
+                </label>
+                <label class="btn btn-secondary">
+                  <input type="radio"  id="ksw-else" name="ksw-selector" value="else"> else
+                </label>
+                <label class="btn btn-secondary">
+                  <input type="radio"  id="ksw-elseif" name="ksw-selector" value="elseif"> elseif
+                </label>
+              </div>
+                
+
+                <div class="mt-3">
+                     Classes
+                    <div class="form-check">
+                       
+                        <input class="form-check-input" type="radio" id="code-button" title="if(Ksw.Code.Gets(" name="ksw-btn" />
+                        <label class="form-check-label" for="code-button">
+                            Ksw.Code.Gets
+                        </label>
+                    </div>
+
+                    
+                    <div class="ml-3">
+                        <input type="checkbox" id="ksw-false" name="tf-btn" value="true" />
+                    <label class="form-check-label" for="false">
+                      False
+                    </div>
+                    <input type="text" class="form-control" id="kswCode" name="description" placeholder="Vxxxx" >
+
+                </div>
+
+                <div class="mt-3">
+                  <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                    <label class="btn btn-secondary active">
+                      <input type="radio"   id="ksw-and"> And
+                    </label>
+                    <label class="btn btn-secondary">
+                      <input type="radio"  id="ksw-or"> Or
+                    </label>
+                    <label class="btn btn-secondary">
+                      <input type="radio"  id="ksw-finish"> Finish
+                    </label>
+                  </div>
+                    
+                </div>
+
+                <div class="mt-3">
+                    <div class="form-check">
+                        <input type="radio" id="text-button" title="if(Ksw.Text.IsMatch(@" name="ksw-btn" />
+                            <label class="form-check-label" for="text-button">
+                                Ksw.Text.IsMatch
+                            </label>
+    
+                            </div>
+                            <div class="ml-3">
+                                <div class="form-check">
+                                    <input type="radio" id="ksw_true" name="kswtf-btn" title="if(Ksw.Text.IsMatch(@ &quot&quot)==true){"
+                    value="true" />
+                            <label class="form-check-label" for="ksw_true">
+                                True
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <input type="radio" id="ksw_false" name="kswtf-btn" title="if(Ksw.Text.IsMatch(@ &quot&quot)==false){"
+                            value="false" />
+                            <label class="form-check-label" for="ksw_false">
+                              False
+                            </label>
+                          </div>
+                            </div>
+                            <input type="text" class="form-control" id="kswTextArea" name="description" placeholder="prosys.*box" >
+                            
+                </div>
+                
+
+
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" id="kswGenerate">Generate</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- \\\\\\\\\\\\\\\\\\   CODE TAB  /////////////////  -->
+
+      <div class="modal fade" id="codeModal" tabindex="-1" aria-labelledby="codeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="codeLabel">Code</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+
+              <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                <label class="btn btn-secondary active">
+                  <input type="radio"  id="code-if" name="code-selector" value="if"> if
+                </label>
+                <label class="btn btn-secondary">
+                  <input type="radio"  id="code-else" name="code-selector" value="else"> else
+                </label>
+                <label class="btn btn-secondary">
+                  <input type="radio"  id="code-elseif" name="code-selector" value="elseif"> elseif
+                </label>
+              </div>
+
+                <div class="mt-3">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item ">
+                            <div class="form-check">
+                                <label><input type="radio" title="if(Code.Contains(" id="contains" name="coderadio"
+                                    value="Contains" />
+                    <label class="form-check-label" for="contains">
+                      Contains
+                    </label>
+                  </div>
+                        </li>
+                        <li class="list-group-item ">
+                            <div class="form-check">
+                                <input type="radio" title="if(Code.ContainsAny(" id="contains" name="coderadio"
+                    value="ContainsAny" />
+                    <label class="form-check-label" for="contains">
+                      Contains Any
+                    </label>
+                  </div>
+                        </li>
+                        <li class="list-group-item ">
+                            <div class="form-check">
+                                <input type="radio" title="if(Code.NotContains(" id="contains" name="coderadio"
+                                value="NotContains" />
+                    <label class="form-check-label" for="contains">
+                      Not Contains
+                    </label>
+                  </div>
+                        </li>
+                    </ul>
+                </div>
+                <input type="text" class="form-control" id="codeTextArea" name="description" placeholder="526KD" >
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" id="codeGenerate">Generate</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- \\\\\\\\\\\\\\\\\\   PARTS TAB  /////////////////  -->
+      <div class="modal fade" id="partsModal" tabindex="-1" aria-labelledby="partsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="partsLabel">Parts</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+
+              <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                <label class="btn btn-secondary active">
+                  <input type="radio"  id="parts-if" name="parts-selector" value="if"> if
+                </label>
+                <label class="btn btn-secondary">
+                  <input type="radio"  id="parts-else" name="parts-selector" value="else"> else
+                </label>
+                <label class="btn btn-secondary">
+                  <input type="radio"  id="parts-elseif" name="parts-selector" value="elseif"> elseif
+                </label>
+              </div>
+
+                
+
+                <div class="mt-3">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item ">
+                            <div class="form-check">
+                                <input type="radio" title="if(Parts.Contains(" id="contains" name="partsradio"
+                    value="Contains" />
+                    <label class="form-check-label" for="contains">
+                      Contains
+                    </label>
+                  </div>
+                        </li>
+                        <li class="list-group-item ">
+                            <div class="form-check">
+                                <input type="radio" title="if(Parts.ContainsAny(" id="contains" name="partsradio"
+                    value="ContainsAny" />
+                    <label class="form-check-label" for="contains">
+                      Contains Any
+                    </label>
+                  </div>
+                        </li>
+                        <li class="list-group-item ">
+                            <div class="form-check">
+                                <input type="radio" title="if(Parts.NotContains(" id="contains" name="partsradio"
+                    value="NotContains" />
+                    <label class="form-check-label" for="contains">
+                      Not Contains
+                    </label>
+                  </div>
+                        </li>
+                    </ul>
+                </div>
+                <input type="text" class="form-control" id="partsTextArea" name="description" placeholder="33251454321" >
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" id="partsGenerate">Generate</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+       <!-- \\\\\\\\\\\\\\\\\\   CHECK/ADD TAB  /////////////////  -->
+       <div class="modal fade" id="checkvalueModal" tabindex="-1" aria-labelledby="checkvalueModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="checkvalueLabel">CheckValue/Add</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+
+                <div class="mt-3">
+                    CheckValue:
+                <input type="text" class="form-control" id="checkvaluetext" name="description" placeholder="33#07MVB047" >
+                </div>
+
+                <div class="mt-3">
+                   Add:
+                <input type="text" class="form-control" id="addvaluetext" name="description" placeholder="33#4H203700" >
+                </div>
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" id="checkaddGenerate">Generate</button>
+              <button type="button" class="btn btn-primary" id="finishcheckaddGenerate">Finish</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+      <!-- \\\\\\\\\\\\\\\\\\   OVERRIDE TAB  /////////////////  -->
+      <div class="modal fade" id="overrideModal" tabindex="-1" aria-labelledby="overrideModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="overrideLabel">Override</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+
+                <p> Click Generate for Override Code. </p>
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" id="overrideGenerate">Generate</button>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- \\\\\\\\\\\\\\\\\\  STRINGBUILDER  TAB  /////////////////  -->
+      <div class="modal fade" id="stringBuilderModal" tabindex="-1" aria-labelledby="stringBuilderModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="stringBuilderLabel">StringBuilder</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+
+                <p> Click Generate for StringBuilder Code. </p>
+
+                <div class="mt-3">
+                    sb.append:
+                    <input type="text" class="form-control" id="sbappendtext" name="description" placeholder='sb.Append ("   ");' >
+                    <button type="button" class="btn btn-primary mt-2" id="stringbuilderGenerate">Generate</button>
+                </div>
+                <!--change this section's id on js code-->
+                <div class="mt-3">
+                    <select class="custom-select" id="errorwarningselector">
+                        <option selected>Open this select menu</option>
+                        <option value="1">Error</option>
+                        <option value="2">Warning</option>
+                      </select>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" id="overrideGenerate">Generate</button>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+
+       <!-- \\\\\\\\\\\\\\\\\\  VEHICLE PROPERTIES  TAB  /////////////////  -->
+
+       <div class="modal fade" id="vehiclePropertiesModal" tabindex="-1" aria-labelledby="vehiclePropertiesModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="vehiclePropertiesLabel">Vehicle Properties</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+
+              <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                <label class="btn btn-secondary active">
+                  <input type="radio"  id="vcode-if" name="vcode-selector" value="if"> if
+                </label>
+                <label class="btn btn-secondary">
+                  <input type="radio"  id="vcode-else" name="vcode-selector" value="else"> else
+                </label>
+                <label class="btn btn-secondary">
+                  <input type="radio"  id="vcode-elseif" name="vcode-selector" value="elseif"> elseif
+                </label>
+              </div>
+                
+
+                <div class="mt-3">
+                    Vehicle.Properties.GFZ
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item ">
+                            <div class="form-check">
+                                <label><input type="radio" value="Left" name="properties" />Left</label>
+                  </div>
+                        </li>
+                        <li class="list-group-item ">
+                            <div class="form-check">
+                             
+                                <label><input type="radio" value="Right" name="properties" />Right</label>
+                  </div>
+                        </li>
+                        
+                    </ul>
+                </div>
+                How many digit:
+                <input type="text" class="form-control" name="description" placeholder="Left(3) || Right(3) " id="gfzProperties" >
+
+               Search GFZ Keyword:
+                <input type="text" class="form-control" name="description" id="gfzPropertiesText" >
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" id="returnGenerate">Return</button>
+              <button type="button" class="btn btn-primary" id="vehicleGenerate">Generate</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+       <!-- \\\\\\\\\\\\\\\\\\  WARNING MESSAGE  TAB  /////////////////  -->
+      <div class="modal fade" id="warningModal" tabindex="-1" aria-labelledby="warningModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="warningLabel">Warning Message</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                      <label for="warningInput">Please enter your error message:</label>
+                      <input type="text" class="form-control" id="warningmessage" aria-describedby="emailHelp" placeholder='Warning("   ");'>
+                      
+                    </div>
+                    
+                  </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" id="warningGenerate">Generate</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+       <!-- \\\\\\\\\\\\\\\\\\  ERROR MESSAGE  TAB  /////////////////  -->
+      <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="errorLabel">Error Message</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="errorInput">Please enter your warning message:</label>
+                        <input type="text" class="form-control" id="errormessage" aria-describedby="emailHelp" placeholder='Error("   ");'>
+                        
+                    </div>
+                    
+                  </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" id="errorGenerate">Generate</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <footer class="footer mt-auto py-3 bg-light m-auto">
+        <div class="container">
+          <span class="text-center text-muted ">  © 2022 MAN TURKEY </span>
+          <span class="float-right text-muted ">   Version 2.0.0</span>
+        </div>
+      </footer>
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+    <script src="generator.js"></script>
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+    -->
+  </body>
+</html>
