@@ -208,6 +208,64 @@ window.onload = function () {
     centerTextAreaclear.value = '';
   });
 
+//newItem Parça saydırma
+$("#newItenGenerate").click(function () {
+  $("#generateCode").append('AntList &lt;PartListItem&gt; partList = PartList.Gets("'+document.getElementById("newItemText").value+
+  '");'+'\n');
+  
+  $.fn.addTabs(bracketCount);
+  $("#generateCode").append('AntDictionary &lt; string, decimal &gt; counts = new AntDictionary &lt;string, decimal&gt;();'+'\n');
+  $.fn.addTabs(bracketCount);
+  $("#generateCode").append('AntDictionary&lt;string, AntList&lt;string&gt;&gt; paths = new AntDictionary&lt;string, AntList&lt;string&gt;&gt;();'+'\n');
+  $.fn.addTabs(bracketCount);
+  $("#generateCode").append('partList.Each(pl =&gt;'+'\n');
+  $.fn.addTabs(bracketCount);
+  $("#generateCode").append("{\n");
+  bracketCount++;
+  $.fn.addTabs(bracketCount);
+  $("#generateCode").append('if (pl.CR == "C")\n');
+  $.fn.addTabs(bracketCount);
+  $("#generateCode").append('else\n');
+  $.fn.addTabs(bracketCount);
+  $("#generateCode").append('{\n');
+  bracketCount++;
+  $.fn.addTabs(bracketCount);
+  $("#generateCode").append('if (pl.PET_HasValue)\n');
+  $.fn.addTabs(bracketCount);
+  $("#generateCode").append('{\n');
+  bracketCount++;
+  $.fn.addTabs(bracketCount);
+  $("#generateCode").append('decimal count = counts.GetValue( pl.Part.FormattedCode ) + pl.MENGE;\n');
+  $.fn.addTabs(bracketCount);
+  $("#generateCode").append('counts.SetValue(pl.Part.FormattedCode, count);\n');
+  $.fn.addTabs(bracketCount);
+  $("#generateCode").append('paths.CheckValue( pl.Part.FormattedCode ).Add(pl.GetPath(" -> "));\n');
+  bracketCount--;
+  $.fn.addTabs(bracketCount);
+  $("#generateCode").append('}\n');
+  bracketCount--;
+  $.fn.addTabs(bracketCount);
+  $("#generateCode").append('}\n');
+  bracketCount--;
+  $.fn.addTabs(bracketCount);
+  $("#generateCode").append('});\n');
+  $.fn.addTabs(bracketCount);
+  $("#generateCode").append('counts.Each(cnt =>\n');
+  $.fn.addTabs(bracketCount);
+  $("#generateCode").append('{\n');
+  bracketCount++;
+  $.fn.addTabs(bracketCount);
+  $("#generateCode").append('if (cnt.Value < '+document.getElementById('newItemTextCounter').value+')');
+  bracketCount++;
+  $.fn.addTabs(bracketCount);
+  $("#generateCode").append('sb.Append("'+document.getElementById("newItemText").value+' kablosu araca'+ document.getElementById('newItemTextCounter').value +'adet gelmelidir.");\n');
+  $.fn.addTabs(bracketCount);
+  $("#generateCode").append('else\n');
+  bracketCount++;
+  $.fn.addTabs(bracketCount);
+  $("#generateCode").append('sb.Append(paths.GetValue(cnt.Key).JoinAs(", ")).Append(" Count : ").Append(cnt.Value); \n');
+  bracketCount=bracketCount-2;
+});
 
 
   //warning
@@ -234,6 +292,8 @@ window.onload = function () {
   });
 
   //copytoclipboard
+ 
+$('[data-toggle="tooltip"]').tooltip();
   $("#copy").click(function () {
     var text = $("#generateCode").val();
     var sampleTextarea = document.createElement("textarea");
@@ -242,9 +302,14 @@ window.onload = function () {
     sampleTextarea.select(); //select textarea contenrs
     document.execCommand("copy");
     document.body.removeChild(sampleTextarea);
-    $("#myTooltip").html("Copied");
+    
+    $("#copy").html("Copied");
+
   });
 
+  
+ 
+  
 
   document.addEventListener('mouseup', function(e) {
     var collection = document.getElementsByClassName("subMenu");
@@ -416,16 +481,41 @@ window.onload = function () {
     finalCodes = $.fn.multipleValues(getCodes);
     $.fn.addTabs(bracketCount);
     shift(document.getElementById("generateCode").value);
-    $("#generateCode").append($("input[name=parts-selector]:checked").val() +
+    if(document.getElementById("partsDoubling").checked){
+      $("#generateCode").append($("input[name=partsradio]:checked").val()+
+      '\nAntList&lt;PartListItem&gt; partCodePartList = partListContainer.Gets("'+
+      document.getElementById("partsTextArea").value+'");\nif (partCodePartList.IsNotEmpty())\n{\n');
+      bracketCount++;
+      $.fn.addTabs(bracketCount);
+     $("#generateCode").append("foreach (PartListItem partListItem in partCodePartList)\n");
+      $.fn.addTabs(bracketCount);
+      $("#generateCode").append("{\n\n");
+      $.fn.addTabs(bracketCount);
+      $("#generateCode").append("}\n");
+      $.fn.addTabs(bracketCount);
+      $("#generateCode").append("partCodePartList.Each(partListItem =&gt;\n");
+      $.fn.addTabs(bracketCount);
+      $("#generateCode").append("{\n\n");
+      $("#generateCode").append("});\n");
+      bracketCount--;
+      $("#generateCode").append('    Error("Araçta  " + partCodePartList.Count + " adet ' +
+      document.getElementById("partsTextArea").value 
+      +' tasteri '+finalVehicleCodes +' göbeklerinden gelmektedir. Fazla olan taster çıkarılmalıdır." );\n');
+    }
+    else{
+      $("#generateCode").append($("input[name=parts-selector]:checked").val() +
       "(Parts." +
       $("input[name=partsradio]:checked").val() +
       "(" +
       finalCodes +
       ")){\n"
     );
+    }
+
     partsTextAreaclear.value = '';
     bracketCount++;
   });
+
 
   // Vehicle.Properties.GFZ
   $("#vehicleGenerate").click(function () {
